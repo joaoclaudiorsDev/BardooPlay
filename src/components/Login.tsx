@@ -1,7 +1,9 @@
 import { SetStateAction, useState } from 'react';
+import { createUser } from '../services/userAPI';
 
 function Login() {
   const [entrance, setEntrance] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   function validEntrance() {
     return entrance.length >= 3;
@@ -9,6 +11,17 @@ function Login() {
   function handleInputChange(event: { target: { value: SetStateAction<string>; }; }) {
     setEntrance(event.target.value);
   }
+  function handleLogin() {
+    if (validEntrance()) {
+      setIsLoading(true); // Ativa o status de carregamento
+
+      createUser({ name: entrance })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }
+
   return (
     <form>
       <input
@@ -20,9 +33,11 @@ function Login() {
       <button
         disabled={ !validEntrance() }
         data-testid="login-submit-button"
+        onClick={ handleLogin }
       >
         Entrar
       </button>
+      {isLoading && <p>Carregando...</p>}
     </form>
   );
 }
