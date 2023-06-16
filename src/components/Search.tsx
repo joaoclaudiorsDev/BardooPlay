@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
+interface Album {
+  collectionId: number;
+  collectionName: string;
+}
+
 function Search() {
   const [entrance, setEntrance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   function validEntrance() {
     return entrance.length >= 2;
@@ -14,10 +20,11 @@ function Search() {
     if (validEntrance()) {
       setIsLoading(true);
 
-      const response = await searchAlbumsAPI(entrance);
+      const response: Album[] = await searchAlbumsAPI(entrance);
 
       setIsLoading(false);
       setAlbums(response);
+      setSearchTerm(entrance);
       setEntrance('');
     }
   }
@@ -49,7 +56,7 @@ function Search() {
 
       {albums.length > 0 ? (
         <div>
-          <p>{`Resultado de álbuns de: ${entrance}`}</p>
+          <p>{`Resultado de álbuns de: ${searchTerm}`}</p>
           <ul>
             {albums.map((album) => (
               <li key={ album.collectionId }>
@@ -64,7 +71,10 @@ function Search() {
           </ul>
         </div>
       ) : (
-        <p>{`Nenhum álbum foi encontrado para: ${entrance}`}</p>
+        <p>
+          {searchTerm ? `Nenhum álbum foi encontrado para: ${searchTerm}`
+            : 'Digite o nome de um artista para pesquisar'}
+        </p>
       )}
     </div>
   );
