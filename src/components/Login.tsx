@@ -1,9 +1,11 @@
 import { SetStateAction, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 
 function Login() {
   const [entrance, setEntrance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function validEntrance() {
     return entrance.length >= 3;
@@ -21,6 +23,10 @@ function Login() {
         });
     }
   }
+  const handleClick = () => {
+    handleLogin();
+    navigate('/search');
+  };
 
   return (
     <form>
@@ -33,7 +39,7 @@ function Login() {
       <button
         disabled={ !validEntrance() }
         data-testid="login-submit-button"
-        onClick={ handleLogin }
+        onClick={ handleClick }
       >
         Entrar
       </button>
