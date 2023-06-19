@@ -52,7 +52,7 @@ function Search() {
         </button>
       </div>
 
-      {isLoading && <p>Carregando...</p>}
+      {isLoading && <p> Carregando...</p>}
 
       {albums.length > 0 ? (
         <div>
