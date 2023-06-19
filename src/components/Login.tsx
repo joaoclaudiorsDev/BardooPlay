@@ -1,6 +1,7 @@
 import { SetStateAction, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
+import Loading from './Loading';
 
 function Login() {
   const [entrance, setEntrance] = useState('');
@@ -38,7 +39,7 @@ function Login() {
       >
         Entrar
       </button>
-      {isLoading && <p>Carregando...</p>}
+      {isLoading && <Loading />}
     </form>
   );
 }

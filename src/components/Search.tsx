@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Header from './Header';
 
 interface Album {
   collectionId: number;
@@ -35,6 +36,7 @@ function Search() {
 
   return (
     <div>
+      <Header />
       <div>
         <input
           data-testid="search-artist-input"
