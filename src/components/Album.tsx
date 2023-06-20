@@ -22,6 +22,7 @@ function Album() {
       setAlbumDescribe(data[0]);
       setSongs(data.slice(1) as SongType[]);
       setLoading(false);
+      console.log('retornou');
     };
 
     fetchAPI();
@@ -33,8 +34,8 @@ function Album() {
         <Loading />
       ) : (
         <div>
-          <h3 data-testid="artist-name">{albumDescribe?.artistName}</h3>
-          <h4 data-testid="album-name">{albumDescribe?.collectionName}</h4>
+          <h3 data-testid="album-name">{albumDescribe?.collectionName}</h3>
+          <h4 data-testid="artist-name">{albumDescribe?.artistName}</h4>
           <ul>
             {songs.map((music) => (<MusicCard key={ music.trackId } songs={ music } />))}
           </ul>
