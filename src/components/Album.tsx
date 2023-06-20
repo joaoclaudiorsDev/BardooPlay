@@ -14,11 +14,11 @@ function Album() {
   const [songs, setSongs] = useState<SongType[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams<keyof MyParams>() as MyParams;
+  const { id } = useParams<MyParams>();
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const data = await getMusics(id);
+      const data = await getMusics(String(id));
       setAlbumDescribe(data[0]);
       setSongs(data.slice(1) as SongType[]);
       setLoading(false);
