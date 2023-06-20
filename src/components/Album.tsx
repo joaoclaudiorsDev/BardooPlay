@@ -5,43 +5,51 @@ import Loading from './Loading';
 import MusicCard from './MusicCard';
 import { SongType, AlbumType } from '../types';
 
-type MyParams = {
-  id: string;
-};
-
 function Album() {
-  const [albumDescribe, setAlbumDescribe] = useState<AlbumType | null>(null);
+  const [albumDescribe, setAlbumDescribe] = useState<AlbumType>();
   const [songs, setSongs] = useState<SongType[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams<keyof MyParams>() as MyParams;
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const data = await getMusics(id.toString());
-      setAlbumDescribe(data[0]);
-      setSongs(data.slice(1) as SongType[]);
-      setLoading(false);
+      if (id) {
+        setLoading(true);
+        const data = await getMusics(id);
+        setAlbumDescribe(data[0]);
+        setSongs(data.slice(1) as SongType[]);
+        setLoading(false);
+      }
     };
 
     fetchAPI();
   }, [id]);
 
-  return (
-    <div>
-      {loading ? (
-        <Loading />
-      ) : (
+  return loading
+    ? (<Loading />)
+    : (
+      <>
         <div>
-          <h3 data-testid="artist-name">{albumDescribe?.artistName}</h3>
-          <h4 data-testid="album-name">{albumDescribe?.collectionName}</h4>
+          <img src={ albumDescribe?.artworkUrl100 } alt="foto do álbum" />
+          <h3 data-testid="album-name">{albumDescribe?.collectionName}</h3>
+          <h4 data-testid="artist-name">{albumDescribe?.artistName}</h4>
+        </div>
+        <div>
           <ul>
-            {songs.map((music) => (<MusicCard key={ music.trackId } songs={ music } />))}
+            {songs.map((music) => (
+              <li key={ music.trackId }>
+                <MusicCard
+                  trackName={ music.trackName }
+                  previewUrl={ music.previewUrl }
+                  trackId={ 0 }
+                />
+              </li>
+            ))}
           </ul>
         </div>
-      )}
-    </div>
-  );
+      </>
+    );
 }
 
 export default Album;
