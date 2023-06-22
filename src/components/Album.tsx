@@ -7,7 +7,7 @@ import { SongType, AlbumType } from '../types';
 
 function Album() {
   const [albumDescribe, setAlbumDescribe] = useState<AlbumType>();
-  const [songs, setSongs] = useState<SongType[]>([]);
+  const [songs, setSongs] = useState<Array<SongType>>([]);
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
