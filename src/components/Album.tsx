@@ -4,6 +4,7 @@ import getMusics from '../services/musicsAPI';
 import Loading from './Loading';
 import MusicCard from './MusicCard';
 import { SongType, AlbumType } from '../types';
+import Header from './Header';
 
 function Album() {
   const [albumDescribe, setAlbumDescribe] = useState<AlbumType>();
@@ -30,6 +31,7 @@ function Album() {
     ? (<Loading />)
     : (
       <>
+        <Header />
         <div>
           <img src={ albumDescribe?.artworkUrl100 } alt="foto do álbum" />
           <h3 data-testid="album-name">{albumDescribe?.collectionName}</h3>
