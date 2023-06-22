@@ -21,7 +21,7 @@ function Header() {
     : (
       <header className="nav-bar" data-testid="header-component">
         <h2 data-testid="header-user-name">
-          Welcome,
+          Listen to music,
           {' '}
           {profile}
           {' '}
