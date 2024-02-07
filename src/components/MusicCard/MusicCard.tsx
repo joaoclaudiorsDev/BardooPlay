@@ -1,4 +1,4 @@
-import { SongType } from '../types';
+import { SongType } from '../../types';
 
 function MusicCard(props: SongType) {
   const { previewUrl, trackName } = props;

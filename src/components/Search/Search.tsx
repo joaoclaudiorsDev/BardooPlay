@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Header from './Header';
+import searchAlbumsAPI from '../../services/searchAlbumsAPI';
 
 interface Album {
   collectionId: number;
@@ -37,7 +36,6 @@ function Search() {
 
   return (
     <div>
-      <Header />
       <div>
         <input
           data-testid="search-artist-input"
@@ -59,7 +57,7 @@ function Search() {
 
       {albums.length > 0 ? (
         <div>
-          <p>{`Resultado de álbuns de: ${searchTerm}`}</p>
+          <h3>{`Resultado de álbuns de: ${searchTerm}`}</h3>
           <ul>
             {albums.map((album) => (
               <li key={ album.collectionId }>

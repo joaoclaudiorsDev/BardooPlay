@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getUser } from '../services/userAPI';
-import Loading from './Loading';
+import { getUser } from '../../services/userAPI';
+import Loading from '../Loading/Loading';
 
 function Header() {
   const [loading, setLoading] = useState(true);

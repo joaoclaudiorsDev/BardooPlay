@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import getMusics from '../services/musicsAPI';
-import Loading from './Loading';
-import MusicCard from './MusicCard';
-import { SongType, AlbumType } from '../types';
-import Header from './Header';
+import getMusics from '../../services/musicsAPI';
+import Loading from '../Loading/Loading';
+import MusicCard from '../MusicCard/MusicCard';
+import { SongType, AlbumType } from '../../types';
+import Header from '../Header/Header';
 
 function Album() {
   const [albumDescribe, setAlbumDescribe] = useState<AlbumType>();
@@ -31,7 +31,6 @@ function Album() {
     ? (<Loading />)
     : (
       <>
-        <Header />
         <div>
           <img src={ albumDescribe?.artworkUrl100 } alt="foto do álbum" />
           <h3 data-testid="album-name">{albumDescribe?.collectionName}</h3>
